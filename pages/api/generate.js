@@ -27,10 +27,14 @@ export default async function (req, res) {
 
   try {
     const completion = await openai.createCompletion({
-      model: "text-davinci-003",
-      prompt: generatePrompt(animal),
+      model: "curie:ft-meldminds-2023-03-04-03-58-42",
+      prompt: generatePromptForOrgHealth(animal),
+      stop:"\n",
       temperature: 0.6,
+      max_tokens:256
+
     });
+    
     res.status(200).json({ result: completion.data.choices[0].text });
   } catch(error) {
     // Consider adjusting the error handling logic for your use case
@@ -59,4 +63,32 @@ Animal: Dog
 Names: Ruff the Protector, Wonder Canine, Sir Barks-a-Lot
 Animal: ${capitalizedAnimal}
 Names:`;
+}
+
+function generatePromptForOrgHealth(animal) {
+  const capitalizedAnimal =
+    animal[0].toUpperCase() + animal.slice(1).toLowerCase();
+  return `Recommend me a resource from the company skilled in Azure.
+  Team:Tina Sharma is skilled in Azure and Power Platform.
+  Recommend me a resource from the company skilled in Scrum.
+  Team: Donna Gates is skilled in Scrum and Project Management.
+  Recommend me a resource from the company skilled in Legal Filing.
+  Team:   Steve Brown is skilled in Legal Filing.
+  Recommend me a resource from the company.
+  Team:  Recommend me a Agile resource from the company.
+  Team:   Donna Gates is skilled in Agile.
+  Recommend me a development team from the company. 
+  Team:  Tina Sharma and Steve Brown make a good team. 
+  Recommend me a project team from the company. 
+  Team: Tina Sharma and Steve Brown make a good team. Steve Brown is skilled in Project Management.
+  Recommend me a project team with Azure skills from the company. 
+  Team:Tina Sharma and Steve Brown make a good team. Steve Brown is skilled in Project Management.
+  Recommend me a project team for legal project from the company. 
+  Team:Tina Sharma and Steve Brown make a good team. Steve Brown is skilled in Legal Filing.
+  Recommend me a resource from the company skilled in Power Platform.
+  Team:Tina Sharma and Steve Brown make a good team. Steve Brown is skilled in Power Platform.
+  Recommend me a SharePoint resource from the company.
+  Team:Tina Sharma is skilled in SharePoint.
+  ${capitalizedAnimal}
+  Team:`;
 }

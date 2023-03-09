@@ -39,7 +39,7 @@
 .main form {
   display: flex;
   flex-direction: column;
-  width: 320px;
+  width: 620px;
 }
 .main input[type="text"] {
   padding: 12px 16px;
@@ -47,6 +47,7 @@
   border-radius: 4px;
   margin-bottom: 24px;
   outline-color: #10a37f;
+
 }
 .main ::placeholder {
   color: #8e8ea0;
@@ -60,6 +61,8 @@
   border-radius: 4px;
   text-align: center;
   cursor: pointer;
+ 
+  
 }
 .main .result {
   font-weight: bold;
