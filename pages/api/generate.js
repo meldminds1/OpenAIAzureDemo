@@ -27,14 +27,14 @@ export default async function (req, res) {
 
   try {
     const completion = await openai.createCompletion({
-      model: "curie:ft-meldminds-2023-03-04-03-58-42",
+      model: "curie:ft-meldminds-2023-03-04-03-58-42",//change the model name to be the one you trained in your account in OpenAI
       prompt: generatePromptForOrgHealth(animal),
       stop:"\n",
       temperature: 0.6,
       max_tokens:256
 
     });
-    
+
     res.status(200).json({ result: completion.data.choices[0].text });
   } catch(error) {
     // Consider adjusting the error handling logic for your use case
